@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col s12 m12 l12">
+    <mat-table #table [dataSource]="this.dataSource" matSort class="table-striped">
+      <ng-container matColumnDef="descricao">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> DESCRICAO </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.descricao}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="altura">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ALTURA </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.altura}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="largura">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> LARGURA </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.largura}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="comprimento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> COMPRIMENTO </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.comprimento}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="capacidade">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> CAPACIDADE </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.capacidade}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dtVencimento">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> VENCIMENTO </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dtVencimento}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="editColumn">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-button (click)="this.editar(element.containerId)">
+            <mat-icon svgIcon="form-edit"></mat-icon>
+          </button>
+          <button mat-button (click)="this.deleteConfirmation(element.containerId)">
+            <mat-icon svgIcon="form-trash"></mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="this.displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: this.displayedColumns;"></mat-row>
+    </mat-table>  
+    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>  
+  </div>
+</div>

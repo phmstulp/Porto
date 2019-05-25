@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col s12 m12 l12">
+    <mat-form-field>
+      <input matInput placeholder="Descricao" type="text" [(ngModel)]="container.descricao" required>
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12 m4 l4">
+    <mat-form-field>
+      <input matInput placeholder="Largura" type="number" [(ngModel)]="container.largura" required>
+    </mat-form-field>
+  </div>
+  <div class="col s12 m4 l4">
+    <mat-form-field>
+      <input matInput placeholder="Altura" type="number" [(ngModel)]="container.altura" required>
+    </mat-form-field>
+  </div>
+  <div class="col s12 m4 l4">
+    <mat-form-field>
+      <input matInput placeholder="Comprimento" type="number" [(ngModel)]="container.comprimento" required>
+    </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12 m4 l4">
+    <mat-form-field>
+      <input matInput placeholder="Capacidade" type="number" [(ngModel)]="container.capacidade" required>
+    </mat-form-field>
+  </div>
+  <div class="col s12 m4 l4">
+    <mat-form-field>
+      <input matInput placeholder="Vencimento" type="date" [(ngModel)]="container.dtVencimento" required>
+    </mat-form-field>
+  </div>
+  <div class="col s12 m4 l4">
+    <mat-form-field>
+      <input matInput placeholder="Tipo" type="number" [(ngModel)]="container.tipo" required>
+    </mat-form-field>
+  </div>
+  <div class="row footer-btn">
+    <div class="button-row col s12"> 
+      <button mat-raised-button color="blue" (click)="this.salvar()" >Salvar</button>
+    </div> 
+  </div>
+</div>
