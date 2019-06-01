@@ -12,6 +12,8 @@ import { MatInputModule, MatRadioModule, MatButtonModule, MatTableModule, MatIco
 import { ContainerComponent } from './cadastros/container/container.component';
 import { ContainerListComponent } from './cadastros/container/container-list/container-list.component';
 import { DialogComponent } from './shared/dialog/dialog/dialog.component';
+import { DatePipe } from '../../node_modules/@angular/common';
+import { NgxSpinnerModule } from 'ngx-spinner';
   
 @NgModule({
   declarations: [
@@ -36,10 +38,11 @@ import { DialogComponent } from './shared/dialog/dialog/dialog.component';
     MatSortModule, 
     MatExpansionModule, 
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxSpinnerModule
 
   ],
-  providers: [HttpClient],
+  providers: [HttpClient, DatePipe],
 
   //Geralmente usa Dialog, Spinner, Message
   entryComponents: [

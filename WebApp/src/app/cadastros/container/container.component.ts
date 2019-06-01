@@ -3,6 +3,7 @@ import { Container } from './model/container';
 import { ContainerService } from './container.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fillProperties } from '@angular/core/src/util/property';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-container',
@@ -15,7 +16,7 @@ export class ContainerComponent implements OnInit {
   edit : Boolean;
 
   constructor(private containerService: ContainerService, private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, public spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.container = new Container();
@@ -29,22 +30,28 @@ export class ContainerComponent implements OnInit {
   }
 
   salvar(){
+    this.spinner.show();
     if (this.edit) {
       this.containerService.update(this.container).subscribe(sucesso => {
         if (sucesso != null) 
           console.log(sucesso);
           this.router.navigate(["../container-list"]);
+          this.spinner.hide();
       },
       error => {
         console.log(error);
+        this.spinner.hide();
       });
     } else {
       this.containerService.save(this.container).subscribe(sucesso => {
         if (sucesso != null) 
           console.log("sucesso");
+          this.router.navigate(["../container-list"]);
+          this.spinner.hide();
       },
       error => {
         console.log("Erro");
+        this.spinner.hide();
       });
   }
   }
@@ -61,6 +68,10 @@ export class ContainerComponent implements OnInit {
 
   fill(container : any) {
     this.container = container;
+  }
+
+  voltar() {
+    this.router.navigate(["../container-list"]);
   }
   
 }

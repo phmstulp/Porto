@@ -1,3 +1,15 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Carregando...</p>
+</ngx-spinner>
+
+<button mat-icon-button>
+  <mat-icon (click)="callNew()">add_circle_button</mat-icon>
+</button>
+
 <div class="row">
   <div class="col s12 m12 l12">
     <mat-table #table [dataSource]="this.dataSource" matSort class="table-striped">
@@ -23,7 +35,15 @@
       </ng-container>
       <ng-container matColumnDef="dtVencimento">
         <mat-header-cell *matHeaderCellDef mat-sort-header> VENCIMENTO </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.dtVencimento}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+           {{datePipe.transform(element.dtVencimento, 'dd/MM/yyyy HH:mm')}} 
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dtRecord">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> CADASTRO </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+           {{datePipe.transform(element.dtRecord, 'dd/MM/yyyy HH:mm')}}
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="editColumn">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>

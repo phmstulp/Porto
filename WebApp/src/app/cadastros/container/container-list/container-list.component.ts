@@ -7,6 +7,8 @@ import { ContainerService } from '../container.service';
 import { Router } from '@angular/router';
 import { DialogComponent } from '../../../shared/dialog/dialog/dialog.component';
 import { MatDialog } from '../../../../../node_modules/@angular/material';
+import { DatePipe } from '../../../../../node_modules/@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-container-list',
@@ -15,14 +17,15 @@ import { MatDialog } from '../../../../../node_modules/@angular/material';
 })
 export class ContainerListComponent implements OnInit {
 
-  displayedColumns: string[] = ["descricao", "altura", "largura", "comprimento", "capacidade", "dtVencimento", "editColumn"];
+  displayedColumns: string[] = ["descricao", "altura", "largura", "comprimento", "capacidade",
+   "dtVencimento", "dtRecord", "editColumn"];
   public dataSource: any;
 
   @ViewChild(MatPaginator) paginatorCustom: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private containerService: ContainerService, private router: Router, 
-    private dialog: MatDialog) { }
+    private dialog: MatDialog, private datePipe: DatePipe, public spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.listAll();
@@ -57,24 +60,30 @@ export class ContainerListComponent implements OnInit {
   }
 
   listAll() {
+    this.spinner.show();
     this.containerService.listAll().subscribe(sucesso => {
       if(sucesso != null) {
         this.atualizaTabela(sucesso);
+        this.spinner.hide();
       }
     },
     error => {
       console.log("Erro");
+      this.spinner.hide();
     });
   }
 
   list(id : number) {
+    this.spinner.show();
     this.containerService.list(id).subscribe(sucesso => {
       if(sucesso != null) {
         this.atualizaTabela(sucesso);
+        this.spinner.hide();
       }
     },
     error => {
       console.log("Erro");
+      this.spinner.hide();
     });
   }
 
@@ -82,6 +91,10 @@ export class ContainerListComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Container>(containers);
     this.dataSource.paginator = this.paginatorCustom;
     this.dataSource.sort = this.sort;
+  }
+
+  callNew() {
+    this.router.navigate(["../container"]);
   }
 
 }
